@@ -11,7 +11,7 @@ const Box = ({children, title}: BoxProps) => {
           {title}
         </div>
       }
-    <div>{children}</div>
+    {children}
     </div>
   )
 }

@@ -1,11 +1,18 @@
 import Box from '@/components/Box'
 import Prompt from '@/components/Prompt';
 import SearchItem from '@/components/SearchItem';
+import { useAppSelector, useAppDispatch } from '@/redux/hooks'
+import { updateSelectedHistory } from '@/redux/slices/searchesSlice'
+import { selectHistoryList, selectSelectedHistory } from '@/redux/selectors/searchesSelectors';
 
 const Sidebar = () => {
+  const dispatch = useAppDispatch();
+  const historyList = useAppSelector(selectHistoryList);
+  const selectedHistoryItem = useAppSelector(selectSelectedHistory);
+
   return ( 
-    <aside className="w-full h-100 flex flex-col content-stretch">
-      <div className="mb-5">
+    <aside className="w-full grid grid-rows-4 gap-5">
+      <div>
         <Box>
           <div className="p-5">
             <h1 className="text-2xl font-bold pb-3">Sistema</h1>
@@ -15,11 +22,21 @@ const Sidebar = () => {
         </Box>
       </div>
       
-      <div className="h-full">
+      <div className="row-span-3">
         <Box title="Historial de Búsquedas">
-          <div className="w-full">
-            <SearchItem title="User Flow" createdAt="2023-11-2" left={24} isSelected={true}/>
-            <SearchItem title="User Persona" createdAt="2023-11-21" left={1} isSelected={false}/>
+          <div className="w-full overflow-auto scroll-smooth">
+            <div>
+            {historyList.map((item) => 
+               <SearchItem 
+                  key={item.id} 
+                  title={item.title} 
+                  createdAt={item.createdAt} 
+                  left={item.left} 
+                  onClick={()=>dispatch(updateSelectedHistory(item))} 
+                  isSelected={selectedHistoryItem ? selectedHistoryItem.id === item.id : false}
+                />
+            )}
+            </div>
           </div>
         </Box>
       </div>

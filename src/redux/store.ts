@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import common from './slices/commonSlice'
+import common from './slices/commonSlice';
+import searches from './slices/searchesSlice'
 
 const store = configureStore({
   reducer: {
-    common
+    common,
+    searches
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

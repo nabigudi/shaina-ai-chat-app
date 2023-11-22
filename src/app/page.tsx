@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <main className="flex h-[90dvh] bg-gray-100 text-black flex-col items-center justify-between p-10">
-      <div className="grid grid-cols-3 gap-4 w-full h-full">
+      <div className="grid grid-cols-3 gap-5">
         <div className={`${isShowSidebar ? 'flex': 'hidden'} transition-[display] duration-700 ease-in-out`}>
           <Sidebar/>
         </div>

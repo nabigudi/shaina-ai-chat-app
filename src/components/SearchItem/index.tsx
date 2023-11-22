@@ -9,10 +9,11 @@ type SearchItemProps = {
   title: string,
   createdAt: string,
   left: number,
+  onClick: () => void,
   isSelected: boolean
 }
 
-const SearchItem = ({title, createdAt, left, isSelected}: SearchItemProps) => {
+const SearchItem = ({title, createdAt, left, onClick, isSelected}: SearchItemProps) => {
   moment.updateLocale('es', {
     relativeTime : {
         future: "en %s",
@@ -35,7 +36,7 @@ const SearchItem = ({title, createdAt, left, isSelected}: SearchItemProps) => {
   });
 
   return ( 
-    <div className={`mx-5 my-3 p-3 text-base flex items-center ${isSelected ? 'bg-orange-50' : 'bg-white'}`}>
+    <div className={`mx-5 my-3 p-3 text-base flex items-center ${isSelected ? 'bg-orange-50' : 'bg-white'}`} onClick={onClick}>
       <div className= "bg-orange-300 p-2 mr-3 text-base inline-flex items-center rounded-full">
         <Search className="text-sm"/>
       </div>
