@@ -5,3 +5,5 @@ export const selectHistoryList = (state: RootState) => state.searches.historyLis
 export const selectSelectedHistory = (state: RootState) => state.searches.selectedHistory;
 
 export const selectSelectedHistoryId = (state: RootState) => state.searches.currentHistory;
+
+export const selectSelectedHistoryChat = (state: RootState) => state.searches.selectedHistoryChat;

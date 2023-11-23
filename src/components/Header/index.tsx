@@ -19,7 +19,7 @@ const Header = () => {
 
   const backButtonAction = () => {
     dispatch(updateCurrentUser(''));
-    dispatch(updateSelectedHistory(null))
+    dispatch(updateSelectedHistory(undefined))
     router.push('/')
   }
 

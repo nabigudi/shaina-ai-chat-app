@@ -1,4 +1,4 @@
-import React, { useState } from "react";;
+import React, { useEffect, useState } from "react";;
 import CirclePlus from 'src/assets/svg/circle-plus.svg';
 import Button from '@/components/Button';
 import Prompt from '@/components/Prompt';
@@ -6,14 +6,15 @@ import ChatBubble from '@/components/ChatBubble';
 import Modal from "@/components/Modal";
 import moment from 'moment';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
-import { createNewHistory } from '@/redux/slices/searchesSlice';
+import { createNewHistory, getHistoryChat } from '@/redux/slices/searchesSlice';
 import { selectCurrentUser } from '@/redux/selectors/commonSelectors';
-import { selectSelectedHistory } from "@/redux/selectors/searchesSelectors";
+import { selectSelectedHistory, selectSelectedHistoryChat } from "@/redux/selectors/searchesSelectors";
 
 const Chat = () => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(selectCurrentUser);
-  const selectedSearch = useAppSelector(selectSelectedHistory)
+  const selectedSearch = useAppSelector(selectSelectedHistory);
+  const selectedHistoryChat = useAppSelector(selectSelectedHistoryChat);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [valueSearch, setValueSearch] = useState<string>('');
 
@@ -27,13 +28,17 @@ const Chat = () => {
       title: valueSearch,
       createdAt: moment().format('YYYY-MM-DD'),
       left: 1000,
-      createdBy: currentUser 
+      createdBy: currentUser,
+      history: [],
     }
     dispatch(createNewHistory(newSearch));
     closeModal();
   }
 
-  console.log(selectedSearch);
+  useEffect(()=>{
+    dispatch(getHistoryChat());
+  }, [dispatch, selectedSearch]);
+
   return ( 
     <>
      {selectedSearch ?
@@ -48,9 +53,9 @@ const Chat = () => {
             </Button>
           </div>
           <div className="bg-gray-100 flex flex-1 flex-col">
-            <ChatBubble name={'Ana Clara'} time={'05:00 pm'} message={'Necesito los archivos que te pedí ayer.'} originUser={'user'} />
-
-            <ChatBubble name={'OdamaChat'} time={'05:00 pm'} message={'Lorem ipsum dolor Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '} originUser={'ai'} />
+            {
+              selectedHistoryChat?.map(item => <ChatBubble key={item.id} name={item.user} time={item.date} message={item.message} originUser={item.typeUser} />)
+            }
           </div>
           <div className="bg-white flex p-5 rounded-b-lg">
             <Prompt isMagic/>
