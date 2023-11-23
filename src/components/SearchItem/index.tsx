@@ -36,7 +36,7 @@ const SearchItem = ({title, createdAt, left, onClick, isSelected}: SearchItemPro
   });
 
   return ( 
-    <div className={`mx-5 my-3 p-3 text-base flex items-center ${isSelected ? 'bg-orange-50' : 'bg-white'}`} onClick={onClick}>
+    <div className={`mx-5 my-3 p-3 text-base flex items-center h-[70px] ${isSelected ? 'bg-orange-50' : 'bg-white'}`} onClick={onClick}>
       <div className= "bg-orange-300 p-2 mr-3 text-base inline-flex items-center rounded-full">
         <Search className="text-sm"/>
       </div>

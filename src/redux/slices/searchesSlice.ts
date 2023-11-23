@@ -57,6 +57,18 @@ const initialHistoryList = [
     title: 'User Flow 2',
     createdAt: '2023-11-21',
     left: 20,
+  },
+  {
+    id: 18,
+    title: 'User Flow 3',
+    createdAt: '2023-11-21',
+    left: 20,
+  },
+  {
+    id: 19,
+    title: 'User Flow 4',
+    createdAt: '2023-11-21',
+    left: 6,
   }
 ]
 // Define the initial state using that type

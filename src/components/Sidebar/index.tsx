@@ -11,8 +11,8 @@ const Sidebar = () => {
   const selectedHistoryItem = useAppSelector(selectSelectedHistory);
 
   return ( 
-    <aside className="w-full grid grid-rows-4 gap-5">
-      <div>
+    <aside className="w-full flex flex-col h-full">
+      <div className="basis-1/4 mb-5 grow-0 shrink-0">
         <Box>
           <div className="p-5">
             <h1 className="text-2xl font-bold pb-3">Sistema</h1>
@@ -22,11 +22,11 @@ const Sidebar = () => {
         </Box>
       </div>
       
-      <div className="row-span-3">
+      <div className="basis-3/4 grow">
         <Box title="Historial de Búsquedas">
-          <div className="w-full overflow-auto scroll-smooth">
-            <div>
-            {historyList.map((item) => 
+          <div className="">
+            <div className='overflow-auto h-[54dvh]'>
+              {historyList.map((item) => 
                <SearchItem 
                   key={item.id} 
                   title={item.title} 
@@ -37,6 +37,7 @@ const Sidebar = () => {
                 />
             )}
             </div>
+            
           </div>
         </Box>
       </div>
