@@ -9,6 +9,7 @@ import { updateShowSidebar } from '@/redux/slices/commonSlice'
 import { selectShowSidebar } from '@/redux/selectors/commonSelectors';
 import { updateCurrentUser } from '@/redux/slices/commonSlice'
 import { useRouter, usePathname } from 'next/navigation';
+import { updateSelectedHistory } from '@/redux/slices/searchesSlice';
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ const Header = () => {
 
   const backButtonAction = () => {
     dispatch(updateCurrentUser(''));
+    dispatch(updateSelectedHistory(null))
     router.push('/')
   }
 

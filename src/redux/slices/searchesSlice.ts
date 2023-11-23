@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
-import moment from 'moment';
 
 type HistorySearch = {
   id: number,
   title: string,
   createdAt: string,
   left: number,
+  createdBy: string,
 }
 // Define a type for the slice state
 interface SearchesState {
@@ -21,54 +21,77 @@ const initialHistoryList = [
     title: 'User Flow',
     createdAt: '2023-11-21',
     left: 20,
+    createdBy: 'Ana Clara'
   },
   {
     id: 2,
     title: 'User Persona',
     createdAt: '2023-11-21',
-    left: 20,
+    left: 1,
+    createdBy: 'Ana Clara'
   },
   {
     id: 3,
     title: 'Nuevo chat',
     createdAt: '2023-11-21',
-    left: 20,
+    left: 2,
+    createdBy: 'Ana Clara'
   },
   {
     id: 4,
     title: 'Descripción',
     createdAt: '2023-11-21',
     left: 20,
+    createdBy: 'Ana Clara'
   },
   {
     id: 10,
     title: 'Referencias Visuales',
     createdAt: '2023-11-21',
-    left: 20,
+    left: 5,
+    createdBy: 'Ana Clara'
   },
   {
     id: 13,
     title: 'Diagrama de Flujo',
     createdAt: '2023-11-21',
     left: 20,
+    createdBy: 'Ana Clara'
   },
   {
     id: 17,
     title: 'User Flow 2',
     createdAt: '2023-11-21',
     left: 20,
+    createdBy: 'José'
+  },
+  {
+    id: 23,
+    title: 'Diagrama de Flujo',
+    createdAt: '2023-11-21',
+    left: 20,
+    createdBy: 'José'
+  },
+  {
+    id: 33,
+    title: 'Nuevo chat',
+    createdAt: '2023-11-21',
+    left: 2,
+    createdBy: 'José'
   },
   {
     id: 18,
     title: 'User Flow 3',
     createdAt: '2023-11-21',
     left: 20,
+    createdBy: 'Ana Clara'
   },
   {
     id: 19,
     title: 'User Flow 4',
     createdAt: '2023-11-21',
     left: 6,
+    createdBy: 'Ana Clara'
   }
 ]
 // Define the initial state using that type
@@ -82,9 +105,9 @@ const searchesSlice = createSlice({
   name: 'searches',
   initialState,
   reducers: {
-    updateSelectedHistory: (state, action: PayloadAction<HistorySearch>) => {
+    updateSelectedHistory: (state, action: PayloadAction<HistorySearch | null>) => {
       state.selectedHistory = action.payload;
-      state.currentHistory = action.payload.id;
+      state.currentHistory = 0;
     }, 
 
     decreasePromptLeft: (state, action: PayloadAction<HistorySearch>) => {
@@ -96,15 +119,11 @@ const searchesSlice = createSlice({
       })
     },
 
-    createNewHistory: (state, action: PayloadAction<string>) => {
-      const newHistory = {
-        id: Math.random(),
-        title: action.payload,
-        createdAt: moment().format('YYYY-MM-DD'),
-        left: 1000,
-      }
+    createNewHistory: (state, action: PayloadAction<HistorySearch>) => {
+      const newHistory = action.payload;
       state.historyList = [...state.historyList, newHistory];
     }, 
+
   },
   extraReducers: (builder) => {
   }
