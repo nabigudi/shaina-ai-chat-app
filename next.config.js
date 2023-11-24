@@ -26,6 +26,9 @@ const nextConfig = {
     fileLoaderRule.exclude = /\.svg$/i
 
     return config
+  },
+  env: {
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY
   }
 }
 
