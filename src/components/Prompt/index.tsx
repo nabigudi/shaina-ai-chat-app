@@ -5,9 +5,7 @@ import moment from 'moment';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { createNewHistory, doCreateNewQuestionAnswer, doSearchOnIA } from '@/redux/slices/searchesSlice';
 import { selectCurrentUser } from '@/redux/selectors/commonSelectors';
-import { useEffect, useState } from 'react';
-import { selectSelectedHistory } from '@/redux/selectors/searchesSelectors';
-import { getOpenAI } from '@/api/openAi';
+import { useState } from 'react';
 
 type PromptProps = {
   role: 'system' | 'user'

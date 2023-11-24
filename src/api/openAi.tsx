@@ -1,5 +1,5 @@
 const axios = require("axios");
-const apiKey = "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";
+const apiKey = "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";
 
 const client = axios.create({
   headers: {

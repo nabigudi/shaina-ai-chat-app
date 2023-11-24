@@ -25,3 +25,26 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer base {
+  ul, ol {
+    list-style: revert;
+    margin-left: 30px;
+  }
+  .markdown p:not(:last-of-type){
+    margin-bottom: 20px;
+  }
+  .markdown{
+    padding-top:10px;
+    padding-bottom: 10px;
+  }
+  pre {
+    background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding: 1.25rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}

@@ -1,4 +1,6 @@
-import Box from '@/components/Box'
+import Box from '@/components/Box';
+import parse from 'html-react-parser';
+import hljs from 'highlight.js';
 
 type ChatBubble = {
   name: string,
@@ -13,7 +15,30 @@ const ChatBubble = ({name, time, message, originUser, loading=false}: ChatBubble
     system: 'text-green-600',
     ai: 'text-orange-400'
   }
-  const processMessage = message.split('\n');
+  const MarkdownIt = require('markdown-it');
+  const markdownAccessibleLists = require("markdown-it-accessible-lists");
+
+  const md = new MarkdownIt({
+    html:         false,
+    breaks:       true,
+    langPrefix:   'language-', 
+    linkify:      true,
+    typographer:  false,
+    quotes: '“”‘’',
+    highlight: function (str: any, lang: any) {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return '<pre className="bg-gray-300 p-5 my-3 font-mono text-sm"><code>' +
+                 hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
+                 '</code></pre>';
+        } catch (__) {}
+      }
+  
+      return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+    }
+  }).use(markdownAccessibleLists);
+
+  const result = parse(md.render(message));
 
   return ( 
     <div className="mx-5 my-5">
@@ -25,11 +50,7 @@ const ChatBubble = ({name, time, message, originUser, loading=false}: ChatBubble
               <span className="text-gray-500 text-xs">{time}</span>
               {loading && <span className="text-orange-400 text-xs">...</span>}
             </div>
-            <div>
-              { processMessage.map((paragraph, index) => <p key={index} className="text-gray-500 py-3">{paragraph}</p>) }
-            </div>
-            
-            
+            <div className='markdown'>{result}</div>
           </div>
         </div>
       </Box>
