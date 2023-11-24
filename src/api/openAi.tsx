@@ -1,5 +1,6 @@
 const axios = require("axios");
-const apiKey = process.env.OPENAI_API_KEY;
+require('dotenv').config();
+const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 
 const client = axios.create({
   headers: {

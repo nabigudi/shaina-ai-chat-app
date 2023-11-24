@@ -4,13 +4,13 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 // Define a type for the slice state
 interface CommonState {
   showSidebar: boolean;
-  currentUser: string
+  currentUser: string;
 }
 
 // Define the initial state using that type
 const initialState: CommonState = {
   showSidebar: true,
-  currentUser: "Ana Clara"
+  currentUser: ""
 };
 
 const commonSlice = createSlice({

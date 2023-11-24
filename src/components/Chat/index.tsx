@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";;
+import React, { useEffect, useRef, useState } from "react";;
 import CirclePlus from 'src/assets/svg/circle-plus.svg';
 import Button from '@/components/Button';
 import Prompt from '@/components/Prompt';
@@ -19,6 +19,7 @@ const Chat = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [valueSearch, setValueSearch] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
+  const chatEndSectionRef = useRef<HTMLDivElement>(null);
 
   const closeModal = () => {
     setOpenModal(false);
@@ -45,6 +46,15 @@ const Chat = () => {
     dispatch(createNewHistory(newSearch));
     closeModal();
   }
+
+  useEffect(() => {
+    if (selectedHistoryChat?.length) {
+      chatEndSectionRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+    }
+  }, [selectedHistoryChat?.length]);
 
   useEffect(()=>{
     dispatch(getHistoryChat());
@@ -80,7 +90,7 @@ const Chat = () => {
               : 
                 <></>
             }
-            
+            <div ref={chatEndSectionRef}></div>
           </div>
           <div className="bg-white flex p-5 rounded-b-lg">
             <Prompt role='user' isLoadingAction={setIsSearching} isMagic/>

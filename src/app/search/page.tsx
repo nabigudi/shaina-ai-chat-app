@@ -1,11 +1,21 @@
 "use client"
 import Chat from '@/components/Chat'
 import Sidebar from '@/components/Sidebar'
-import { useAppSelector } from '@/redux/hooks'
-import { selectShowSidebar } from '@/redux/selectors/commonSelectors';
+import { useAppSelector } from '@/redux/hooks';
+import { selectCurrentUser, selectShowSidebar } from '@/redux/selectors/commonSelectors';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
+  const { push } = useRouter();
   const isShowSidebar = useAppSelector(selectShowSidebar);
+  const currentUser = useAppSelector(selectCurrentUser);
+
+  useEffect(()=>{
+    if(!currentUser){
+      push('/');
+    }
+  }, []);
 
   return (
     <main style={{height: 'calc(100dvh - 80px)'}} className="flex bg-gray-100 text-black flex-col items-center justify-between p-10">

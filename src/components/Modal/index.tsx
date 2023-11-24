@@ -9,11 +9,13 @@ const Modal = ({children, title}: ModalProps) => {
   return ( 
     <>
     <div className="bg-gray-900 w-full h-full absolute top-0 left-0 opacity-50"></div>
-    <div className="w-[30rem] z-40 shadow-md rounded-md divide-y divide-gray-300 bg-white absolute top-28 left-auto">
-      <div className="text-lg font-bold p-5">
-        {title}
+    <div className="w-full h-full absolute top-0 left-0 flex flex-col justify-center items-center">
+      <div className="w-[30rem] z-40 shadow-md rounded-md divide-y divide-gray-300 bg-white">
+        <div className="text-lg font-bold p-5 text-black">
+          {title}
+        </div>
+        {children}
       </div>
-      {children}
     </div>
     </>
   )

@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { getOpenAI } from '@/api/openAi';
 import moment from 'moment';
 import { selectLastSearch } from '../selectors/searchesSelectors';
-import { initialHistoryList } from '../helpers';
+import { initialHistoryList } from '@/redux/helpers';
 
 type HistoryChat = {
   id: number,
@@ -120,7 +120,8 @@ const searchesSlice = createSlice({
 
     createNewHistory: (state, action: PayloadAction<HistorySearch>) => {
       const newHistory = action.payload;
-      state.historyList = [...state.historyList, newHistory];
+      state.historyList = [newHistory, ...state.historyList];
+      state.selectedHistory = action.payload;
     }, 
 
     createNewQuestionAnswer: (state, action: PayloadAction<HistoryChat>) => {
