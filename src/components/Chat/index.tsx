@@ -8,15 +8,17 @@ import moment from 'moment';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { createNewHistory, getHistoryChat } from '@/redux/slices/searchesSlice';
 import { selectCurrentUser } from '@/redux/selectors/commonSelectors';
-import { selectSelectedHistory, selectSelectedHistoryChat } from "@/redux/selectors/searchesSelectors";
+import { selectIASearchingState, selectSelectedHistory, selectSelectedHistoryChat } from "@/redux/selectors/searchesSelectors";
 
 const Chat = () => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(selectCurrentUser);
   const selectedSearch = useAppSelector(selectSelectedHistory);
+  const IAsearch = useAppSelector(selectIASearchingState);
   const selectedHistoryChat = useAppSelector(selectSelectedHistoryChat);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [valueSearch, setValueSearch] = useState<string>('');
+  const [isSearching, setIsSearching] = useState<boolean>(false);
 
   const closeModal = () => {
     setOpenModal(false);
@@ -24,12 +26,21 @@ const Chat = () => {
   }
   const createNewSearch = () => {
     const newSearch = {
-      id: Math.random(),
+      id: Math.floor(Math.random() * 100),
       title: valueSearch,
       createdAt: moment().format('YYYY-MM-DD'),
       left: 1000,
       createdBy: currentUser,
-      history: [],
+      history: [
+        {
+          id: 1,
+          role: 'system' as const,
+          user: currentUser,
+          message: valueSearch,
+          typeMessage: 'string',
+          date: moment().format('YYYY-MM-DD'),
+        }
+      ],
     }
     dispatch(createNewHistory(newSearch));
     closeModal();
@@ -38,6 +49,12 @@ const Chat = () => {
   useEffect(()=>{
     dispatch(getHistoryChat());
   }, [dispatch, selectedSearch]);
+
+  useEffect(()=>{
+    // if (IAsearch === 'succeded'){
+      setIsSearching(false);
+    // }
+  },[selectedHistoryChat]);
 
   return ( 
     <>
@@ -52,13 +69,20 @@ const Chat = () => {
               </div>
             </Button>
           </div>
-          <div className="bg-gray-100 flex flex-1 flex-col">
+          <div className="bg-gray-100 flex flex-1 flex-col overflow-auto max-h-[70dvh] scroll-smooth">
             {
-              selectedHistoryChat?.map(item => <ChatBubble key={item.id} name={item.user} time={item.date} message={item.message} originUser={item.typeUser} />)
+              selectedHistoryChat?.map(item => <ChatBubble key={item.id+item.user} name={item.user} time={item.date} message={item.message} originUser={item.role} />)
             }
+            {
+              isSearching? 
+                <ChatBubble key='pendingIA' name={'OdamaChat'} time={''} message={''} originUser={'ai'} loading={true}/> 
+              : 
+                <></>
+            }
+            
           </div>
           <div className="bg-white flex p-5 rounded-b-lg">
-            <Prompt isMagic/>
+            <Prompt role='user' isLoadingAction={setIsSearching} isMagic/>
           </div>
         </div>
       :

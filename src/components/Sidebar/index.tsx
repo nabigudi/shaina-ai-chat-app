@@ -20,7 +20,7 @@ const Sidebar = () => {
           <div className="p-5">
             <h1 className="text-2xl font-bold pb-3">Sistema</h1>
             <p className="text-gray-500 pb-3">Para conseguir una respuesta adecuada a tus necesidades, escribe un prompt para el sistema.</p>
-            <Prompt />
+            <Prompt role='system' />
           </div>
         </Box>
       </div>
@@ -32,7 +32,7 @@ const Sidebar = () => {
               <div className='overflow-auto h-[54dvh]'>
                 {currentUserHistoryList.map((item) => 
                 <SearchItem 
-                    key={item.id} 
+                    key={item.id + item.title} 
                     title={item.title} 
                     createdAt={item.createdAt} 
                     left={item.left} 
