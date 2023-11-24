@@ -70,7 +70,12 @@ const Prompt = ({role, isMagic = false, isLoadingAction=()=>{}}: PromptProps) =>
   return (
     <div className="relative w-full">
       <input className="border-2 border-slate-300 rounded h-8 w-full px-2 py-1" placeholder="Insertar prompt" 
-        value={valueSearch} onChange={(e) => setValueSearch(e.currentTarget.value)}/>
+        value={valueSearch} onChange={(e) => setValueSearch(e.currentTarget.value)} 
+        onKeyDown={(e) =>{if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopPropagation();
+          doSearch(role);
+        }}}/>
 
       <div className="absolute right-0.5 top-0.5">
         <IconButton onClick={()=>doSearch(role)}>

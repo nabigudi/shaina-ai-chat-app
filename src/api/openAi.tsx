@@ -1,5 +1,4 @@
 const axios = require("axios");
-// const apiKey = "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";
 const apiKey = process.env.OPENAI_API_KEY;
 
 const client = axios.create({

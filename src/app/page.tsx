@@ -27,7 +27,12 @@ export default function Home() {
           
           <div className="relative w-full">
             <input type="text" value={value} className="border-2 border-slate-300 rounded h-8 w-full px-2 py-1" placeholder="Ingresa tu nombre" 
-              onChange={e => {setValue(e.currentTarget.value)}}/>
+              onChange={e => {setValue(e.currentTarget.value)}} 
+              onKeyDown={(e) =>{if (e.key === 'Enter') {
+                e.preventDefault();
+                e.stopPropagation();
+                onClickAction();
+              }}}/>
             <div className="absolute right-0.5 top-0.5">
             <button className= "p-1 text-base inline-flex items-center cursor-pointer" onClick={()=>onClickAction()}>
               <Send className="text-sm"/>

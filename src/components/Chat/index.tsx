@@ -69,6 +69,7 @@ const Chat = () => {
               </div>
             </Button>
           </div>
+          
           <div className="bg-gray-100 flex flex-1 flex-col overflow-auto max-h-[70dvh] scroll-smooth">
             {
               selectedHistoryChat?.map(item => <ChatBubble key={item.id+item.user} name={item.user} time={item.date} message={item.message} originUser={item.role} />)

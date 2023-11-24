@@ -379,5 +379,38 @@ export const initialHistoryList = [
         date: '5:00 pm'
       }
     ]
+  },
+  {
+    id: 19,
+    title: 'Eres un programador',
+    createdAt: '2023-11-21',
+    left: 6,
+    createdBy: 'José',
+    history: [
+      {
+        id: 1,
+        user: 'José',
+        role: "system" as const,
+        message: 'Eres un programador',
+        typeMessage: 'string',
+        date: '5:00 pm'
+      },
+      {
+        id: 2,
+        user: 'José',
+        role: "user" as const,
+        message: 'Necesito un código en javascript para restar dos numeros enteros',
+        typeMessage: 'string',
+        date: '5:00 pm'
+      },
+      {
+        id: 3,
+        user: 'OdamaChat',
+        role: "ai" as const,
+        message: 'Claro, aquí tienes un ejemplo de código en JavaScript para restar dos números enteros: ```javascript var num1 = 10; var num2 = 5; var resta = num1 - num2; console.log("El resultado es: " + resta); ``` En este ejemplo, se restan los números enteros `num1` y `num2`, y se guarda el resultado en la variable `resta`. Luego, se muestra el resultado en la consola utilizando `console.log()`. Puedes ajustar los valores de `num1` y `num2` según tus necesidades.',
+        typeMessage: 'string',
+        date: '5:00 pm'
+      }
+    ]
   }
 ]
