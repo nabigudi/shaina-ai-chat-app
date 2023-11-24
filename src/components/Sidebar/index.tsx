@@ -33,6 +33,7 @@ const Sidebar = () => {
                 {currentUserHistoryList.map((item) => 
                 <SearchItem 
                     key={item.id + item.title} 
+                    id={item.id}
                     title={item.title} 
                     createdAt={item.createdAt} 
                     left={item.left} 

@@ -11,3 +11,5 @@ export const selectSelectedHistoryChat = (state: RootState) => state.searches.se
 export const selectLastSearch = (state: RootState) => state.searches.lastSearch;
 
 export const selectIASearchingState = (state: RootState) => state.searches.IASearchingState;
+
+export const selectPromptLeft = (state: RootState) => state.searches.selectedHistory?.left;

@@ -109,7 +109,7 @@ const searchesSlice = createSlice({
       state.currentHistory = 0;
     }, 
 
-    decreasePromptLeft: (state, action: PayloadAction<HistorySearch>) => {
+    decreasePromptLeft: (state) => {
       state.historyList = state.historyList.map(item => {
         if (item.id === state.selectedHistory?.id) {
           return {...item, left: --item.left};
@@ -145,7 +145,16 @@ const searchesSlice = createSlice({
         ]
       };
       state.lastSearch = params;
-      state.IASearchingState = 'pending'
+      state.IASearchingState = 'pending';
+      //discount a token on a AI response
+      if(action.payload.role==='ai'){
+        state.historyList = state.historyList.map(item => {
+          if (item.id === state.selectedHistory?.id) {
+            return {...item, left: --item.left};
+          }
+          return item;
+        })
+      }
     }, 
 
     getHistoryChat: (state) => {

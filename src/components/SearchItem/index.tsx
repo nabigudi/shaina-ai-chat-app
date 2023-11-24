@@ -4,8 +4,11 @@ import Trash from '@/assets/svg/trash.svg'
 import Check from '@/assets/svg/check.svg'
 import Cross from '@/assets/svg/cross.svg'
 import moment from 'moment';
+import { useAppSelector } from '@/redux/hooks'
+import { selectSelectedHistory, selectPromptLeft } from '@/redux/selectors/searchesSelectors'
 
 type SearchItemProps = {
+  id: number,
   title: string,
   createdAt: string,
   left: number,
@@ -13,7 +16,10 @@ type SearchItemProps = {
   isSelected: boolean
 }
 
-const SearchItem = ({title, createdAt, left, onClick, isSelected}: SearchItemProps) => {
+const SearchItem = ({id, title, createdAt, left, onClick, isSelected}: SearchItemProps) => {
+  const currentSelectedHistory = useAppSelector(selectSelectedHistory);
+  const itemsLeftonSelectedHistory = useAppSelector(selectPromptLeft);
+  const itemsLeft =  id === currentSelectedHistory?.id ? itemsLeftonSelectedHistory : left;
   moment.updateLocale('es', {
     relativeTime : {
         future: "en %s",
@@ -44,7 +50,7 @@ const SearchItem = ({title, createdAt, left, onClick, isSelected}: SearchItemPro
         <h2>{title}</h2>
         <div className= "flex items-center text-gray-400 text-sm">
           <Left className="mr-2"/>
-          <span>{moment(createdAt, "YYYY-M-D").fromNow()}, queda{left > 1 && 'n'} {left} token{left > 1 && 's'} disponible{left>1 && 's'}</span>
+          <span>{moment(createdAt, "YYYY-M-D").fromNow()}, queda{left > 1 && 'n'} {itemsLeft} token{left > 1 && 's'} disponible{left>1 && 's'}</span>
         </div>
       </div>
       <div className="flex flex-row justify-items-end">
