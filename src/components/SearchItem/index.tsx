@@ -22,6 +22,7 @@ const SearchItem = ({item, onClick, isSelected}: SearchItemProps) => {
   const currentSelectedHistory = useAppSelector(selectSelectedHistory);
   const itemsLeftonSelectedHistory = useAppSelector(selectPromptLeft);
   const itemsLeft =  item.id === currentSelectedHistory?.id ? itemsLeftonSelectedHistory : item.left;
+  
   moment.updateLocale('es', {
     relativeTime : {
         future: "en %s",
@@ -61,7 +62,7 @@ const SearchItem = ({item, onClick, isSelected}: SearchItemProps) => {
         <h2>{item.title}</h2>
         <div className= "flex items-center text-gray-400 text-sm ">
           <Left className="mr-2 hidden lg:inline-flex text-md"/>
-          <span>{moment(item.createdAt, 'YYYY-MM-DD HH:mm').fromNow()}, queda{item.left > 1 && 'n'} {itemsLeft} token{item.left > 1 && 's'} disponible{item.left>1 && 's'}</span>
+          <p><span className="mr-1">{moment(item.createdAt, 'YYYY-MM-DD HH:mm').fromNow()},</span><span className={item.left === 0 ? 'text-red-700' : item.left < 10 ? 'text-orange-400' : 'text-gray-400'}>{item.left === 0 ? 'no hay tokens disponibles' : `queda${item.left > 1 ? 'n' :''} ${itemsLeft} token${item.left > 1 ? 's' : ''} disponible${item.left>1 ? 's':''}`}</span></p>
         </div>
       </div>
       <div className="flex flex-row justify-items-end">

@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { updateShowSidebar } from '@/redux/slices/commonSlice';
 import Modal from '@/components/Modal';
 import Button from '@/components/Button';
+import { selectPromptLeft } from '@/redux/selectors/searchesSelectors';
 
 type PromptProps = {
   role: 'system' | 'user'
@@ -19,6 +20,7 @@ type PromptProps = {
 const Prompt = ({role, isMagic = false, isLoadingAction=()=>{}}: PromptProps) => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(selectCurrentUser);
+  const itemsLeftonSelectedHistory = useAppSelector(selectPromptLeft);
   const [valueSearch, setValueSearch] = useState<string>('');
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -86,7 +88,8 @@ const Prompt = ({role, isMagic = false, isLoadingAction=()=>{}}: PromptProps) =>
             e.preventDefault();
             e.stopPropagation();
             doSearch(role);
-          }}}/>
+          }}}
+          disabled={itemsLeftonSelectedHistory===0}/>
 
         <div className="absolute right-0.5 top-0.5">
           <IconButton title={'Enviar'} onClick={()=>doSearch(role)}>
