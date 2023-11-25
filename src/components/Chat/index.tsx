@@ -61,10 +61,10 @@ const Chat = () => {
   }, [dispatch, selectedSearch]);
 
   useEffect(()=>{
-    // if (IAsearch === 'succeded'){
+    if (selectedHistoryChat?.length && selectedHistoryChat?.length%2 !== 0){
       setIsSearching(false);
-    // }
-  },[selectedHistoryChat]);
+    }
+  },[selectedHistoryChat?.length]);
 
   return ( 
     <>

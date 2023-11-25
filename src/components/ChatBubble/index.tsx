@@ -48,7 +48,7 @@ const ChatBubble = ({name, time, message, originUser, loading=false}: ChatBubble
             <div className="flex flex-row items-center pb-3">
               <h1 className={`text-lg font-bold mr-3 ${origin[originUser]}`}>{name}</h1>
               <span className="text-gray-500 text-xs">{time}</span>
-              {loading && <span className="text-orange-400 text-xs">...</span>}
+              {loading && <div className="dot-pulse ml-5"></div>}
             </div>
             <div className='markdown'>{result}</div>
           </div>
