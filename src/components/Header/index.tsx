@@ -10,7 +10,7 @@ import { selectCurrentUser, selectShowSidebar } from '@/redux/selectors/commonSe
 import { updateCurrentUser } from '@/redux/slices/commonSlice'
 import { useRouter, usePathname } from 'next/navigation';
 import { updateSelectedHistory } from '@/redux/slices/searchesSlice';
-import Modal from '../Modal';
+import Modal from '@/components/Modal';
 import { useState } from 'react';
 
 const Header = () => {

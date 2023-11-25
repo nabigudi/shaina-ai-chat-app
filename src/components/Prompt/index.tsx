@@ -7,8 +7,8 @@ import { createNewHistory, doCreateNewQuestionAnswer, doSearchOnIA } from '@/red
 import { selectCurrentUser } from '@/redux/selectors/commonSelectors';
 import { useEffect, useState } from 'react';
 import { updateShowSidebar } from '@/redux/slices/commonSlice';
-import Modal from '../Modal';
-import Button from '../Button';
+import Modal from '@/components/Modal';
+import Button from '@/components/Button';
 
 type PromptProps = {
   role: 'system' | 'user'

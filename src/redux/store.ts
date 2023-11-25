@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import common from './slices/commonSlice';
-import searches from './slices/searchesSlice'
+import common from '@/redux/slices/commonSlice';
+import searches from '@/redux/slices/searchesSlice'
 
 const store = configureStore({
   reducer: {

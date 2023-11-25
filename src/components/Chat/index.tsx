@@ -8,13 +8,12 @@ import moment from 'moment';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { createNewHistory, getHistoryChat } from '@/redux/slices/searchesSlice';
 import { selectCurrentUser } from '@/redux/selectors/commonSelectors';
-import { selectIASearchingState, selectSelectedHistory, selectSelectedHistoryChat } from "@/redux/selectors/searchesSelectors";
+import { selectSelectedHistory, selectSelectedHistoryChat } from "@/redux/selectors/searchesSelectors";
 
 const Chat = () => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(selectCurrentUser);
   const selectedSearch = useAppSelector(selectSelectedHistory);
-  const IAsearch = useAppSelector(selectIASearchingState);
   const selectedHistoryChat = useAppSelector(selectSelectedHistoryChat);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [valueSearch, setValueSearch] = useState<string>('');
