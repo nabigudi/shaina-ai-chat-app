@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";;
+import React, { useEffect, useRef, useState } from "react";
+import Image from 'next/image'
 import CirclePlus from 'src/assets/svg/circle-plus.svg';
+import NoResults from '@/assets/no-results.png';
 import Button from '@/components/Button';
 import Prompt from '@/components/Prompt';
 import ChatBubble from '@/components/ChatBubble';
@@ -100,7 +102,12 @@ const Chat = () => {
           <div className='flex bg-white rounded-t-lg p-5'>
           </div>
           <div className="bg-gray-100 flex flex-1 flex-col">
-            <div className="p-10 text-md text-gray-500 font-bold italic flex flex-col items-center">
+            <div className="h-full p-10 text-md text-gray-500 font-bold italic flex flex-col items-center justify-center">
+              <Image
+                src={NoResults}
+                alt="Picture of the author"
+                className="h-20 w-20 mb-10"
+              />
               <p>No se ha seleccionado una búsqueda para ver el chat con la AI.</p>
               <p>Por favor seleccione una de la lista en el barra lateral.</p>
             </div>

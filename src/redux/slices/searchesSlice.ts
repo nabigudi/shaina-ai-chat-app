@@ -115,19 +115,18 @@ const searchesSlice = createSlice({
       state.selectedHistoryChat = state.selectedHistory ? state.selectedHistory.history : [];
 
       const systemContent = state.selectedHistory?.history.find(item => item.role === 'system');
-      const lastUserContent = state.selectedHistory?.history.findLast(item => item.role === 'user');
+      const userContents = state.selectedHistory?.history.filter(item => item.role === 'user');
+      let allMessages = [{
+        role: "system",
+        content: systemContent?.message
+      }];
+      userContents?.map((us) => allMessages.push( {role: "user", content: us.message }))
+
       const params = {
         model: "gpt-3.5-turbo",
-        messages: [{
-            role: "system",
-            content: systemContent?.message
-          },
-          {
-            role: "user",
-            content: lastUserContent?.message
-          }
-        ]
+        messages: allMessages,
       };
+
       state.lastSearch = params;
       state.IASearchingState = 'pending';
       //discount a token on a AI response

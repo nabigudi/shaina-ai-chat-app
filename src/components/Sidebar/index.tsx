@@ -1,4 +1,6 @@
 import Box from '@/components/Box'
+import Image from 'next/image'
+import NoResults from '@/assets/no-results.png';
 import Prompt from '@/components/Prompt';
 import SearchItem from '@/components/SearchItem';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
@@ -41,6 +43,11 @@ const Sidebar = () => {
               </div>
             :
               <div className="p-10 text-md text-gray-500 font-bold italic flex flex-col items-center">
+                <Image
+                  src={NoResults}
+                  alt="Picture of the author"
+                  className="h-20 w-20 mb-10"
+                />
                 <p>No hay búsquedas realizadas con este usuario.</p>
                 <p>Por favor haga una búsqueda nueva.</p>
               </div>
