@@ -5,7 +5,7 @@ import ChevronLeft from 'src/assets/svg/chevron-left.svg'
 import Settings from 'src/assets/svg/settings.svg'
 import Button from '../Button'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
-import { updateShowSidebar } from '@/redux/slices/commonSlice'
+import { resetShowSidebar, updateShowSidebar } from '@/redux/slices/commonSlice'
 import { selectCurrentUser, selectShowSidebar } from '@/redux/selectors/commonSelectors';
 import { updateCurrentUser } from '@/redux/slices/commonSlice'
 import { useRouter, usePathname } from 'next/navigation';
@@ -23,7 +23,8 @@ const Header = () => {
 
   const backButtonAction = () => {
     dispatch(updateCurrentUser(''));
-    dispatch(updateSelectedHistory(undefined))
+    dispatch(updateSelectedHistory(undefined));
+    dispatch(resetShowSidebar());
     router.push('/')
   }
 

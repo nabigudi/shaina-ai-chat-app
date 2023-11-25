@@ -22,6 +22,9 @@ const commonSlice = createSlice({
     }, 
     updateShowSidebar: (state) => {
       state.showSidebar = !state.showSidebar;
+    },
+    resetShowSidebar: (state) => {
+      state.showSidebar = initialState.showSidebar;
     }
   },
   extraReducers: (builder) => {
@@ -29,6 +32,6 @@ const commonSlice = createSlice({
 });
 
 
-export const { updateCurrentUser, updateShowSidebar } = commonSlice.actions;
+export const { updateCurrentUser, updateShowSidebar, resetShowSidebar } = commonSlice.actions;
 
 export default commonSlice.reducer;

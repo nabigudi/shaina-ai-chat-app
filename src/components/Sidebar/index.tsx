@@ -7,13 +7,26 @@ import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { updateSelectedHistory } from '@/redux/slices/searchesSlice'
 import { selectHistoryList, selectSelectedHistory } from '@/redux/selectors/searchesSelectors';
 import { selectCurrentUser } from '@/redux/selectors/commonSelectors';
+import { useEffect, useState } from 'react';
+import { HistorySearch } from '@/types/historyTypes';
+import { updateShowSidebar } from '@/redux/slices/commonSlice';
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
   const historyList = useAppSelector(selectHistoryList);
   const currentUser = useAppSelector(selectCurrentUser);
   const currentUserHistoryList = historyList.filter(item => item.createdBy === currentUser)
-  const selectedHistoryItem = useAppSelector(selectSelectedHistory);
+  const selectedHistoryItem = useAppSelector(selectSelectedHistory);  
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(()=>{
+    setIsMobile(window.innerWidth <= 640)
+  }, [])
+
+  const selectItem = (item: HistorySearch) => {
+    dispatch(updateSelectedHistory(item));
+    isMobile && dispatch(updateShowSidebar());
+  }
 
   return ( 
     <aside className="w-full flex flex-col h-full">
@@ -36,7 +49,7 @@ const Sidebar = () => {
                 <SearchItem 
                     key={item.id + item.title} 
                     item={item}
-                    onClick={()=>dispatch(updateSelectedHistory(item))} 
+                    onClick={()=>selectItem(item)} 
                     isSelected={selectedHistoryItem ? selectedHistoryItem.id === item.id : false}
                   />
               )}
