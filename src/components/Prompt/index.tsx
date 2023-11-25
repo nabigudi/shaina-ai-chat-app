@@ -6,8 +6,6 @@ import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { createNewHistory, doCreateNewQuestionAnswer, doSearchOnIA } from '@/redux/slices/searchesSlice';
 import { selectCurrentUser } from '@/redux/selectors/commonSelectors';
 import { useState } from 'react';
-import MobileDetect from "mobile-detect";
-import { GetServerSidePropsContext } from "next";
 import { updateShowSidebar } from '@/redux/slices/commonSlice';
 
 type PromptProps = {
