@@ -34,7 +34,7 @@ export default function Home() {
                 onClickAction();
               }}}/>
             <div className="absolute right-0.5 top-0.5">
-            <button className= "p-1 text-base inline-flex items-center cursor-pointer" onClick={()=>onClickAction()}>
+            <button title={'Ingresar con este nombre de usuario'} className= "p-1 text-base inline-flex items-center cursor-pointer" onClick={()=>onClickAction()}>
               <Send className="text-sm"/>
             </button>
             </div>

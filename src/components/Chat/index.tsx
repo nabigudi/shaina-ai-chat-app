@@ -72,7 +72,7 @@ const Chat = () => {
         <div className="rounded-lg border-slate-200 border-2 divide-y-2 h-full flex flex-col">
           <div className='flex flex-col items-start md:items-center md:justify-between bg-white px-5 py-3 rounded-t-lg md:flex-row'>
             <h3 className="font-bold text-lg mb-1 md:mb-0">OdamaChat</h3>
-            <Button onClick={()=>setOpenModal(true)}> 
+            <Button title={'Crear Nueva Búsqueda'} onClick={()=>setOpenModal(true)}> 
               <div className="text-white flex items-center text-sm">
                 <CirclePlus className="mr-1"/>
                 Nueva Búsqueda
@@ -120,7 +120,7 @@ const Chat = () => {
             <input className="border-2 border-slate-300 rounded h-8 w-full px-2 py-1" placeholder="Insertar prompt" value={valueSearch} onChange={(e) => setValueSearch(e.currentTarget.value)}/>
             <div className="pt-3 w-full flex flex-row justify-end items-center">
               <div className="mr-3">
-                <Button  onClick={createNewSearch}> 
+                <Button onClick={createNewSearch}> 
                   <div className="text-white flex items-center text-sm">
                     Crear Nueva Búsqueda
                   </div>

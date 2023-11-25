@@ -85,7 +85,7 @@ const Prompt = ({role, isMagic = false, isLoadingAction=()=>{}}: PromptProps) =>
         }}}/>
 
       <div className="absolute right-0.5 top-0.5">
-        <IconButton onClick={()=>doSearch(role)}>
+        <IconButton title={'Enviar'} onClick={()=>doSearch(role)}>
           <Send className="text-sm"/>
         </IconButton>
         {isMagic &&

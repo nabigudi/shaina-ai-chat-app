@@ -1,11 +1,12 @@
 type IconButtonProps = {
   onClick: () => void,
+  title?: string,
   children: React.ReactNode,
 }
 
-const IconButton = ({onClick, children}: IconButtonProps) => {
+const IconButton = ({onClick, title, children}: IconButtonProps) => {
   return ( 
-    <button className= "p-1 text-base inline-flex items-center cursor-pointer" onClick={onClick}>
+    <button title={title} className= "p-1 text-base inline-flex items-center cursor-pointer" onClick={onClick}>
       {children}
     </button>
   )

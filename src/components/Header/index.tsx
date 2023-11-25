@@ -29,18 +29,18 @@ const Header = () => {
         <>
           <div className="flex items-center">
             <div className="mr-3">
-              <Button onClick={backButtonAction}>
+              <Button title={'Atrás'} onClick={backButtonAction}>
                 <ChevronLeft className="text-sm"/> Atrás
               </Button>
             </div>
 
-            <Button onClick={()=>{dispatch(updateShowSidebar())}} isSelected={currentSidebar}>
+            <Button title={'Mostrar/Ocultar Sidebar'} onClick={()=>{dispatch(updateShowSidebar())}} isSelected={currentSidebar}>
               {currentSidebar ? <Sidebar className="text-sm"/> : <SidebarSelected className="text-sm"/>}
             </Button>
           </div>
           <div className="flex items-center">
             <Button>
-              <Settings className="text-sm"/>
+              <Settings title={'Configuración'} className="text-sm"/>
             </Button>
           </div>
         </>
