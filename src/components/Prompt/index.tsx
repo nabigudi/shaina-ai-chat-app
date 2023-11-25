@@ -5,7 +5,7 @@ import moment from 'moment';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { createNewHistory, doCreateNewQuestionAnswer, doSearchOnIA } from '@/redux/slices/searchesSlice';
 import { selectCurrentUser } from '@/redux/selectors/commonSelectors';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { updateShowSidebar } from '@/redux/slices/commonSlice';
 
 type PromptProps = {
@@ -18,9 +18,11 @@ const Prompt = ({role, isMagic = false, isLoadingAction=()=>{}}: PromptProps) =>
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(selectCurrentUser);
   const [valueSearch, setValueSearch] = useState<string>('');
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
-
-  const isMobile = window.innerWidth <= 640;
+  useEffect(()=>{
+    setIsMobile(window.innerWidth <= 640)
+  }, [])
 
   const createNewSearch = () => {
     const newSearch = {
