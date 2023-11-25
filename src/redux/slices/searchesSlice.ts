@@ -4,24 +4,7 @@ import { getOpenAI } from '@/api/openAi';
 import moment from 'moment';
 import { selectLastSearch } from '../selectors/searchesSelectors';
 import { initialHistoryList } from '@/redux/helpers';
-
-type HistoryChat = {
-  id: number,
-  user: string,
-  role: "system" | "user" | "ai",
-  message: string,
-  typeMessage: string,
-  date: string
-}
-
-type HistorySearch = {
-  id: number,
-  title: string,
-  createdAt: string,
-  left: number,
-  createdBy: string,
-  history: HistoryChat[]
-}
+import { HistorySearch, HistoryChat } from '@/types/historyTypes';
 
 type prompt = {
   role: string,
@@ -85,10 +68,10 @@ export const doSearchOnIA = createAsyncThunk('searches/doSearch', async(newData:
           const IAResponse = {
             id: Math.floor(Math.random() * 100),
             role: 'ai' as const,
-            user: 'OdamaChat',
+            user: 'Shaina Chat',
             message: response.choices[0].message.content,
             typeMessage: 'string', //chat.completion --> object?
-            date: moment().format('YYYY-MM-DD'),
+            date: moment().format('YYYY-MM-DD HH:mm'),
           }
           return thunkAPI.dispatch(createNewQuestionAnswer(IAResponse));
       }).catch(err => console.log(err));
@@ -156,6 +139,17 @@ const searchesSlice = createSlice({
           return item;
         })
       }
+    },
+    
+    deleteHistory: (state, action: PayloadAction<HistorySearch>) => {
+      state.historyList = state.historyList.filter(item => item.id !== action.payload.id);
+      state.selectedHistory = undefined;
+      state.selectedHistoryChat = undefined;
+    }, 
+
+    deselectHistory: (state) => {
+      state.selectedHistory = undefined;
+      state.selectedHistoryChat = undefined;
     }, 
 
     getHistoryChat: (state) => {
@@ -180,7 +174,7 @@ const searchesSlice = createSlice({
   }
 });
 
-export const { updateSelectedHistory, decreasePromptLeft, createNewHistory, createNewQuestionAnswer, getHistoryChat } = searchesSlice.actions;
+export const { updateSelectedHistory, decreasePromptLeft, createNewHistory, createNewQuestionAnswer, getHistoryChat, deleteHistory, deselectHistory } = searchesSlice.actions;
 
 export default searchesSlice.reducer;
 function rejectWithValue(data: any): any {

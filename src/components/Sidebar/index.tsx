@@ -33,10 +33,7 @@ const Sidebar = () => {
                 {currentUserHistoryList.map((item) => 
                 <SearchItem 
                     key={item.id + item.title} 
-                    id={item.id}
-                    title={item.title} 
-                    createdAt={item.createdAt} 
-                    left={item.left} 
+                    item={item}
                     onClick={()=>dispatch(updateSelectedHistory(item))} 
                     isSelected={selectedHistoryItem ? selectedHistoryItem.id === item.id : false}
                   />

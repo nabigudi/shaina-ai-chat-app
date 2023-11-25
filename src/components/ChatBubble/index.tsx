@@ -1,6 +1,7 @@
 import Box from '@/components/Box';
 import parse from 'html-react-parser';
 import hljs from 'highlight.js';
+import moment from 'moment';
 
 type ChatBubble = {
   name: string,
@@ -47,7 +48,7 @@ const ChatBubble = ({name, time, message, originUser, loading=false}: ChatBubble
           <div className="divide-y-2">
             <div className="flex flex-row items-center pb-3">
               <h1 className={`text-lg font-bold mr-3 ${origin[originUser]}`}>{name}</h1>
-              <span className="text-gray-500 text-xs">{time}</span>
+              {!loading && <span className="text-gray-500 text-xs">{moment(time).format("HH:mm")}</span>}
               {loading && <div className="dot-pulse ml-5"></div>}
             </div>
             <div className='markdown'>{result}</div>

@@ -6,16 +6,20 @@ import Settings from 'src/assets/svg/settings.svg'
 import Button from '../Button'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { updateShowSidebar } from '@/redux/slices/commonSlice'
-import { selectShowSidebar } from '@/redux/selectors/commonSelectors';
+import { selectCurrentUser, selectShowSidebar } from '@/redux/selectors/commonSelectors';
 import { updateCurrentUser } from '@/redux/slices/commonSlice'
 import { useRouter, usePathname } from 'next/navigation';
 import { updateSelectedHistory } from '@/redux/slices/searchesSlice';
+import Modal from '../Modal';
+import { useState } from 'react';
 
 const Header = () => {
   const dispatch = useAppDispatch();
+  const currentUser = useAppSelector(selectCurrentUser);
   const currentSidebar = useAppSelector(selectShowSidebar);
   const router = useRouter();
   const pathname = usePathname();
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const backButtonAction = () => {
     dispatch(updateCurrentUser(''));
@@ -39,10 +43,24 @@ const Header = () => {
             </Button>
           </div>
           <div className="flex items-center">
-            <Button>
-              <Settings title={'Configuración'} className="text-sm"/>
+            <Button title={'Configuración'} onClick={()=>{setOpenModal(true)}}>
+              <Settings className="text-sm"/>
             </Button>
           </div>
+          { openModal && 
+            <Modal title="Configuración">
+              <div className="flex flex-col p-5">
+                <p className="pb-3 text-gray-500">Actualmente te encuentras logueado como: <span className="pb-3 text-gray-500 italic text-sm font-bold">{currentUser}</span></p>
+                <div className="pt-3 w-full flex flex-row justify-end items-center">
+                  <Button onClick={()=>setOpenModal(false)}> 
+                    <div className="text-white flex items-center text-sm">
+                      Volver
+                    </div>
+                  </Button>
+                </div>
+              </div>
+            </Modal> 
+          }
         </>
       }
     </div>

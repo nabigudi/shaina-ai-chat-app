@@ -4,22 +4,24 @@ import Trash from '@/assets/svg/trash.svg'
 import Check from '@/assets/svg/check.svg'
 import Cross from '@/assets/svg/cross.svg'
 import moment from 'moment';
-import { useAppSelector } from '@/redux/hooks'
-import { selectSelectedHistory, selectPromptLeft } from '@/redux/selectors/searchesSelectors'
+import { useAppSelector, useAppDispatch } from '@/redux/hooks'
+import { selectSelectedHistory, selectPromptLeft, } from '@/redux/selectors/searchesSelectors'
+import { deleteHistory, deselectHistory } from '@/redux/slices/searchesSlice'
+import { useState } from 'react'
+import { HistorySearch } from '@/types/historyTypes';
 
 type SearchItemProps = {
-  id: number,
-  title: string,
-  createdAt: string,
-  left: number,
+  item: HistorySearch
   onClick: () => void,
-  isSelected: boolean
+  isSelected: boolean, 
 }
 
-const SearchItem = ({id, title, createdAt, left, onClick, isSelected}: SearchItemProps) => {
+const SearchItem = ({item, onClick, isSelected}: SearchItemProps) => {
+  const dispatch = useAppDispatch();
+  const [deleteClicked, setDeleteClicked] = useState<boolean>(false);
   const currentSelectedHistory = useAppSelector(selectSelectedHistory);
   const itemsLeftonSelectedHistory = useAppSelector(selectPromptLeft);
-  const itemsLeft =  id === currentSelectedHistory?.id ? itemsLeftonSelectedHistory : left;
+  const itemsLeft =  item.id === currentSelectedHistory?.id ? itemsLeftonSelectedHistory : item.left;
   moment.updateLocale('es', {
     relativeTime : {
         future: "en %s",
@@ -41,26 +43,43 @@ const SearchItem = ({id, title, createdAt, left, onClick, isSelected}: SearchIte
     }
   });
 
+  const confirmDeleteItem = (item: HistorySearch) => {
+    dispatch(deleteHistory(item))
+  };
+
+  const deselectHistoryAction = () => {
+    dispatch(deselectHistory());
+    setDeleteClicked(false);
+  };
+
   return ( 
-    <div className={`mx-5 my-3 p-3 text-base flex items-center ${isSelected ? 'bg-orange-50' : 'bg-white'}`} onClick={onClick}>
+    <div className={`mx-5 my-3 p-3 text-base flex items-center ${isSelected ? 'bg-orange-50' : 'bg-white'}`}>
       <div className= "bg-orange-300 p-2 mr-3 text-base items-center rounded-full hidden lg:inline-flex">
         <Search className="text-sm"/>
       </div>
-      <div className= "flex-1">
-        <h2>{title}</h2>
+      <div className= "flex-1 cursor-pointer" onClick={onClick}>
+        <h2>{item.title}</h2>
         <div className= "flex items-center text-gray-400 text-sm ">
           <Left className="mr-2 hidden lg:inline-flex text-md"/>
-          <span>{moment(createdAt, "YYYY-M-D").fromNow()}, queda{left > 1 && 'n'} {itemsLeft} token{left > 1 && 's'} disponible{left>1 && 's'}</span>
+          <span>{moment(item.createdAt, 'YYYY-MM-DD HH:mm').fromNow()}, queda{item.left > 1 && 'n'} {itemsLeft} token{item.left > 1 && 's'} disponible{item.left>1 && 's'}</span>
         </div>
       </div>
       <div className="flex flex-row justify-items-end">
-      {isSelected ?
-          <div className="flex flex-row context-end">
-            <Check className="text-sm"/>
-            <Cross className="text-sm"/>
+      {deleteClicked ?
+          <div className="flex flex-row context-end" >
+            <div className=" mr-3">
+              <button title="Confirmar Borrado de Búsqueda" onClick={()=>confirmDeleteItem(item)}>
+                <Check className="text-sm cursor-pointer"/>
+              </button>
+            </div>
+            <button title="Cancelar Borrado de Búsqueda" onClick={()=>deselectHistoryAction()}>
+              <Cross className="text-sm cursor-pointer" />
+            </button>
           </div> 
-        : 
-          <Trash className="text-sm"/>
+      :
+          <button title={'Borrar Búsqueda'} onClick={()=>setDeleteClicked(true)}>
+             <Trash className="text-sm cursor-pointer"/>
+          </button> 
       }
       </div>
     </div>

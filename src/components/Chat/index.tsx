@@ -39,7 +39,7 @@ const Chat = () => {
           user: currentUser,
           message: valueSearch,
           typeMessage: 'string',
-          date: moment().format('YYYY-MM-DD'),
+          date: moment().format('YYYY-MM-DD HH:mm'),
         }
       ],
     }
@@ -71,7 +71,7 @@ const Chat = () => {
      {selectedSearch ?
         <div className="rounded-lg border-slate-200 border-2 divide-y-2 h-full flex flex-col">
           <div className='flex flex-col items-start md:items-center md:justify-between bg-white px-5 py-3 rounded-t-lg md:flex-row'>
-            <h3 className="font-bold text-lg mb-1 md:mb-0">OdamaChat</h3>
+            <h3 className="font-bold text-lg mb-1 md:mb-0">Shaina Chat</h3>
             <Button title={'Crear Nueva Búsqueda'} onClick={()=>setOpenModal(true)}> 
               <div className="text-white flex items-center text-sm">
                 <CirclePlus className="mr-1"/>
@@ -86,7 +86,7 @@ const Chat = () => {
             }
             {
               isSearching? 
-                <ChatBubble key='pendingIA' name={'OdamaChat'} time={''} message={''} originUser={'ai'} loading={true}/> 
+                <ChatBubble key='pendingIA' name={'Shaina Chat'} time={''} message={''} originUser={'ai'} loading={true}/> 
               : 
                 <></>
             }
