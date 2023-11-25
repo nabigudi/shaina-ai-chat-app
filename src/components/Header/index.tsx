@@ -28,9 +28,11 @@ const Header = () => {
       {pathname !== '/' &&
         <>
           <div className="flex items-center">
-            <Button onClick={backButtonAction}>
-              <ChevronLeft className="text-sm"/> Atrás
-            </Button>
+            <div className="mr-3">
+              <Button onClick={backButtonAction}>
+                <ChevronLeft className="text-sm"/> Atrás
+              </Button>
+            </div>
 
             <Button onClick={()=>{dispatch(updateShowSidebar())}} isSelected={currentSidebar}>
               {currentSidebar ? <Sidebar className="text-sm"/> : <SidebarSelected className="text-sm"/>}

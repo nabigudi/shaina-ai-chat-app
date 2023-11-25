@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <main className="flex h-[90dvh] bg-gray-100 text-black flex-col items-center justify-center p-10">
-      <div className="h-auto shadow-md rounded-md divide-y divide-gray-300 bg-white w-1/4">
+      <div className="h-auto shadow-md rounded-md divide-y divide-gray-300 bg-white sm:w-full md:w-2/3 lg:w-1/4">
         <div className="text-lg font-bold p-5">
           Bienvenido a Renaiss AI Chat
         </div>

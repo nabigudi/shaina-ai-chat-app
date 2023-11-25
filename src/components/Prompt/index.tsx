@@ -6,6 +6,9 @@ import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { createNewHistory, doCreateNewQuestionAnswer, doSearchOnIA } from '@/redux/slices/searchesSlice';
 import { selectCurrentUser } from '@/redux/selectors/commonSelectors';
 import { useState } from 'react';
+import MobileDetect from "mobile-detect";
+import { GetServerSidePropsContext } from "next";
+import { updateShowSidebar } from '@/redux/slices/commonSlice';
 
 type PromptProps = {
   role: 'system' | 'user'
@@ -17,6 +20,9 @@ const Prompt = ({role, isMagic = false, isLoadingAction=()=>{}}: PromptProps) =>
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(selectCurrentUser);
   const [valueSearch, setValueSearch] = useState<string>('');
+
+
+  const isMobile = window.innerWidth <= 640;
 
   const createNewSearch = () => {
     const newSearch = {
@@ -37,6 +43,7 @@ const Prompt = ({role, isMagic = false, isLoadingAction=()=>{}}: PromptProps) =>
       ],
     }
     dispatch(createNewHistory(newSearch));
+    isMobile && dispatch(updateShowSidebar());
   }
 
   const createQuestionToAI = () => {

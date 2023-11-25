@@ -42,14 +42,14 @@ const SearchItem = ({id, title, createdAt, left, onClick, isSelected}: SearchIte
   });
 
   return ( 
-    <div className={`mx-5 my-3 p-3 text-base flex items-center h-[70px] ${isSelected ? 'bg-orange-50' : 'bg-white'}`} onClick={onClick}>
-      <div className= "bg-orange-300 p-2 mr-3 text-base inline-flex items-center rounded-full">
+    <div className={`mx-5 my-3 p-3 text-base flex items-center ${isSelected ? 'bg-orange-50' : 'bg-white'}`} onClick={onClick}>
+      <div className= "bg-orange-300 p-2 mr-3 text-base items-center rounded-full hidden lg:inline-flex">
         <Search className="text-sm"/>
       </div>
       <div className= "flex-1">
         <h2>{title}</h2>
-        <div className= "flex items-center text-gray-400 text-sm">
-          <Left className="mr-2"/>
+        <div className= "flex items-center text-gray-400 text-sm ">
+          <Left className="mr-2 hidden lg:inline-flex text-md"/>
           <span>{moment(createdAt, "YYYY-M-D").fromNow()}, queda{left > 1 && 'n'} {itemsLeft} token{left > 1 && 's'} disponible{left>1 && 's'}</span>
         </div>
       </div>
@@ -63,7 +63,6 @@ const SearchItem = ({id, title, createdAt, left, onClick, isSelected}: SearchIte
           <Trash className="text-sm"/>
       }
       </div>
-      
     </div>
   )
 }
