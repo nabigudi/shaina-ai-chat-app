@@ -29,7 +29,7 @@ const Sidebar = () => {
         <Box title="Historial de Búsquedas">
           <div>
             {currentUserHistoryList.length ? 
-              <div className='overflow-auto h-[54dvh]'>
+              <div className='overflow-auto lg:h-[54dvh] md:h-[52dvh] h-[50dvh]'>
                 {currentUserHistoryList.map((item) => 
                 <SearchItem 
                     key={item.id + item.title} 
