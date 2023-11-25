@@ -102,7 +102,7 @@ const Prompt = ({role, isMagic = false, isLoadingAction=()=>{}}: PromptProps) =>
       {openModal &&
         <Modal title='Sobre esta IA'>
           <div className="flex flex-col p-5">
-            <p className="pb-3 text-gray-500">Hola, soy Shaina Chat GPT-3, un modelo de lenguaje desarrollado por OpenAI. Estoy aquí para ayudarte con cualquier pregunta o tarea que tengas.</p>
+            <p className="pb-3 text-gray-500">Hola, soy <span className="font-bold">Shaina Chat</span> GPT-3, un modelo de lenguaje desarrollado por OpenAI. Estoy aquí para ayudarte con cualquier pregunta o tarea que tengas.</p>
             <p className="pb-3 text-gray-500">Puedo comunicarme en varios idiomas, incluyendo inglés, español, francés, alemán, italiano, portugués, neerlandés, ruso, chino y japonés, entre otros.</p>
             <p className="pb-3 text-gray-500">¿En qué puedo ayudarte hoy?</p>
             
