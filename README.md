@@ -10,6 +10,8 @@ You can access the repo here: [GitHub Repo](https://github.com/nabigudi/renaiss-
 ### This project was a Frontend Challenge 
 As Shaina Chat AI was a frontend challenge, here is part of the requirements and restrictions:
 - The designs are on Figma; here are the screenshots.
+![figma1](https://github.com/nabigudi/renaiss-ai-chat-app/assets/5604332/bdea2b02-f463-48dc-9c8f-8f857f087d6b)
+![figma3](https://github.com/nabigudi/renaiss-ai-chat-app/assets/5604332/96a50e19-6fef-4ebf-851f-b4c56eda97eb)
 - I must use OpenAI API.
 - I must use React and Typescript, but I can choose which framework or library to use. I choose NextJS.
 - The application must have a specific section to configure the system indicator for Open AI, and the model must respond according to the configuration of said indicator.
