@@ -1,4 +1,4 @@
-# Shaina Chat AI - Renaiss AI Chat App
+# Shaina Chat AI
 
 ## The project
 Shaina Chat AI is a simple chat app where you can send any question, and an AI will answer it. 
@@ -8,7 +8,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 You can access the repo here: [GitHub Repo](https://github.com/nabigudi/renaiss-ai-chat-app)
 
 ### This project was a Frontend Challenge 
-As Shaina Chat AI was a frontend challenge, here is part of the requirements and restrictions:
+As Shaina Chat AI was a frontend challenge for Renaiss AI Chat, here is part of the requirements and restrictions:
 - The designs are on Figma; here are the screenshots.
 ![figma1](https://github.com/nabigudi/renaiss-ai-chat-app/assets/5604332/bdea2b02-f463-48dc-9c8f-8f857f087d6b)
 ![figma3](https://github.com/nabigudi/renaiss-ai-chat-app/assets/5604332/96a50e19-6fef-4ebf-851f-b4c56eda97eb)
